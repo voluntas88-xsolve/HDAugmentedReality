@@ -49,13 +49,15 @@ open class ARAnnotation: NSObject
     /**
      Returns annotation with azimuth and elvation.
      */
-    public init?(identifier: String?, title: String?, azimuth: Double, elevation: Double)
+    public init?(identifier: String?, title: String?, azimuth: Double, elevation: Double, location: CLLocation)
     {
+        guard CLLocationCoordinate2DIsValid(location.coordinate) else { return nil }
+        
         self.identifier = identifier
         self.title = title
         self.azimuth = azimuth
         self.elevation = elevation
-        self.location = CLLocation()
+        self.location = location
     }
     
     /// Validates location.coordinate and sets it.
