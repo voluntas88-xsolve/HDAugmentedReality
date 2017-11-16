@@ -338,7 +338,6 @@ open class ARPresenter: UIView
      */
     open func layout(arStatus: ARStatus, reloadType: ARViewController.ReloadType, needsRelayout: Bool)
     {
-        let pitchYOffset = CGFloat(arStatus.pitch * arStatus.vPixelsPerDegree)
         let annotationViews = needsRelayout ? self.annotationViews : self.visibleAnnotationViews
         
         for annotationView in annotationViews
@@ -352,7 +351,8 @@ open class ARPresenter: UIView
                 annotationView.arPosition = CGPoint(x: x, y: y)
             }
             let headingXOffset = CGFloat(deltaAngle(annotation.azimuth, arStatus.heading)) * CGFloat(arStatus.hPixelsPerDegree)
-
+            let pitchYOffset = CGFloat(deltaAngle(arStatus.pitch, annotation.elevation) * arStatus.vPixelsPerDegree)
+            
             let x: CGFloat = annotationView.arPosition.x + headingXOffset
             let y: CGFloat = annotationView.arPosition.y + pitchYOffset + annotationView.arPositionOffset.y
             

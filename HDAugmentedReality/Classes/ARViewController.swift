@@ -323,8 +323,11 @@ open class ARViewController: UIViewController, ARTrackingManagerDelegate
         
         for annotation in self.annotations
         {
-            let azimuth = self.trackingManager.azimuthFromUserToLocation(userLocation: userLocation, location: annotation.location)
-            annotation.azimuth = azimuth
+            if(annotation.azimuth == 0)
+            {
+                let azimuth = self.trackingManager.azimuthFromUserToLocation(userLocation: userLocation, location: annotation.location)
+                annotation.azimuth = azimuth
+            }
         }
     }
 

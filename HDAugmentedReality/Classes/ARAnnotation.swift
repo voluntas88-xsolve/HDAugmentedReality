@@ -31,6 +31,7 @@ open class ARAnnotation: NSObject
     // Internal use only, do not set this properties
     internal(set) open var distanceFromUser: Double = 0
     internal(set) open var azimuth: Double = 0
+    internal(set) open var elevation: Double = 0
     internal(set) open var active: Bool = false
     
     /**
@@ -43,6 +44,18 @@ open class ARAnnotation: NSObject
         self.identifier = identifier
         self.title = title
         self.location = location
+    }
+    
+    /**
+     Returns annotation with azimuth and elvation.
+     */
+    public init?(identifier: String?, title: String?, azimuth: Double, elevation: Double)
+    {
+        self.identifier = identifier
+        self.title = title
+        self.azimuth = azimuth
+        self.elevation = elevation
+        self.location = CLLocation()
     }
     
     /// Validates location.coordinate and sets it.
